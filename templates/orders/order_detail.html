@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Order #{{ order.id }} - MyDuka{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Order #{{ order.id }}</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                Order Details
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.items.all %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>KSh {{ item.price }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>KSh {{ item.total_price }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr class="table-secondary">
+                                <td colspan="3" class="text-end fw-bold">Order Total:</td>
+                                <td class="fw-bold">KSh {{ order.total_price }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                Shipping Information
+            </div>
+            <div class="card-body">
+                <p><strong>Status:</strong> 
+                    <span class="badge bg-{% if order.status == 'delivered' %}success{% elif order.status == 'cancelled' %}danger{% else %}warning{% endif %}">
+                        {{ order.get_status_display }}
+                    </span>
+                </p>
+                <p><strong>Order Date:</strong> {{ order.created_at|date:"M d, Y H:i" }}</p>
+                <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+                <p><strong>Shipping Address:</strong><br>{{ order.shipping_address }}</p>
+            </div>
+        </div>
+        
+        <a href="{% url 'order_list' %}" class="btn btn-outline-secondary">Back to Orders</a>
+    </div>
+</div>
+{% endblock %}

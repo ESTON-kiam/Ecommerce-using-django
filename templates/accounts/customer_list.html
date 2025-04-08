@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Customers - MyDuka{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Customers</h2>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Date Joined</th>
+                <th>Last Login</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.username }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.date_joined|date:"M d, Y" }}</td>
+                <td>{{ customer.last_login|timesince }} ago</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No customers found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

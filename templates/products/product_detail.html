@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - MyDuka{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded">
+    </div>
+    <div class="col-md-6">
+        <h2>{{ product.name }}</h2>
+        <p class="text-muted">{{ product.category.name }}</p>
+        
+        <div class="mb-3">
+            {% if product.discount_price %}
+            <h4 class="text-danger">KSh {{ product.discount_price }}</h4>
+            <h5 class="text-muted text-decoration-line-through">KSh {{ product.price }}</h5>
+            {% else %}
+            <h4>KSh {{ product.price }}</h4>
+            {% endif %}
+        </div>
+        
+        <div class="mb-3">
+            <span class="badge bg-{% if product.in_stock %}success{% else %}danger{% endif %}">
+                {% if product.in_stock %}In Stock ({{ product.stock }} available){% else %}Out of Stock{% endif %}
+            </span>
+        </div>
+        
+        <p>{{ product.description }}</p>
+        
+        {% if product.in_stock %}
+        <form action="{% url 'add_to_cart' product.id %}" method="post" class="d-flex align-items-center">
+            {% csrf_token %}
+            <div class="input-group me-3" style="width: 120px;">
+                <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+        {% endif %}
+        
+        {% if not request.user.is_customer %}
+        <div class="mt-4">
+            <a href="{% url 'product_update' product.slug %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a href="{% url 'product_delete' product.slug %}" class="btn btn-sm btn-outline-danger">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
