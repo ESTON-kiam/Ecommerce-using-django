@@ -1,0 +1,120 @@
+
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 12px 20px;
+        font-weight: 500;
+        color: #495057;
+        transition: all 0.3s ease;
+    }
+
+    .list-group-item:hover, .list-group-item.active {
+        background-color: #f8f9fa;
+        color: #0d6efd;
+        border-left: 4px solid #0d6efd;
+    }
+
+    .list-group-item.active {
+        font-weight: 600;
+    }
+
+    .card-img-top {
+        object-fit: cover;
+        height: 200px;
+        width: 100%;
+    }
+
+    .card-title {
+        font-weight: 600;
+        color: #212529;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .badge {
+        font-weight: 500;
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+
+    .bg-success {
+        background-color: #198754 !important;
+    }
+
+    .bg-danger {
+        background-color: #dc3545 !important;
+    }
+
+    .text-decoration-line-through {
+        text-decoration: line-through;
+        font-size: 0.85rem;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+        font-weight: 600;
+    }
+
+    .btn-outline-primary {
+        border-width: 1.5px;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .pagination .page-link {
+        color: #0d6efd;
+        margin: 0 5px;
+        border-radius: 5px;
+    }
+
+    .alert-info {
+        background-color: #e7f5ff;
+        border-color: #d0ebff;
+        color: #1864ab;
+    }
+
+    .no-image-placeholder {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        color: #6c757d;
+        font-style: italic;
+    }
+
+    .category-card {
+        position: sticky;
+        top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .category-card {
+            position: static;
+            margin-bottom: 20px;
+        }
+    }
